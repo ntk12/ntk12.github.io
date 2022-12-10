@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#680" />
+    <title>2 methods for counting one bit</title>
+    <meta
+      name="description"
+      content="two methods for counting one bit"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/prism-base16-monokai.dark.css"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.xml"
+      type="application/atom+xml"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.json"
+      type="application/json"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "forest",
+      });
+    </script>
+
+    
+  </head>
+  <body>
+    <div class="topnav">
+      <div class="topnav-content">
+        <a href="/" style="vertical-align: middle">
+          <img
+            src="/img/home.svg"
+            alt="home icon"
+            align="middle"
+            height="18"
+            width="18"
+          />
+          <span>Kha</span>
+        </a>
+        <a href="/research">Research</a>
+        <a href="/blog">Blog</a>
+
+        <div class="topnav-right">
+          <a
+            href="https://github.com/lotusirous"
+            target="_blank"
+            rel="noreferrer"
+            title="Github"
+            ><img
+              alt="Github"
+              src="/img/social/github.svg"
+              height="20"
+              width="20"
+          /></a>
+          <a
+            href="https://twitter.com/__ngtrongkha"
+            target="_blank"
+            rel="noreferrer"
+            title="Twitter"
+            ><img
+              alt="Twitter"
+              src="/img/social/twitter.svg"
+              height="20"
+              width="20"
+          /></a>
+          <a
+            href="https://unix.stackexchange.com/users/40333/lotusirous"
+            target="_blank"
+            rel="noreferrer"
+            title="StackExchange"
+            ><img
+              alt="StackExchange"
+              class="keep-original"
+              src="/img/social/Stack_Exchange_icon.svg"
+              height="20"
+              width="20"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div id="main">
+        <main><div class="article">
+
+<h1 class="post-title">2 methods for counting one bit</h1>
+<div class="when">
+  <time datetime="Saturday, October 17, 2020">Posted on Saturday, October 17, 2020</time>
+</div>
+
+
+<p>While solving the challenges in <a href="https://cryptopals.com/sets/1/challenges/6">cryptopals</a>,</p>
+<h1>A common methods</h1>
+<p>Here is the common method has O(n) complexity.</p>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">CountOnesBit</span><span class="token punctuation">(</span>x <span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span><br>  <span class="token keyword">var</span> count <span class="token builtin">int</span><br>  <span class="token keyword">for</span> <span class="token punctuation">;</span> b <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> b <span class="token operator">>>=</span> <span class="token number">1</span> <span class="token punctuation">{</span><br>    count <span class="token operator">+=</span> <span class="token function">int</span><span class="token punctuation">(</span>b <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span><br>  <span class="token punctuation">}</span><br>  <span class="token keyword">return</span> count<br><span class="token punctuation">}</span></code></pre>
+<h1>A fast method</h1>
+<p>Benchmark</p>
+
+
+<div class="direction"><div class="next">« <a href="/posts/flare-on-challenge-1/">[Flare on 2020] Level 1</a></div>
+</div>
+
+</div>
+</main>
+      </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>

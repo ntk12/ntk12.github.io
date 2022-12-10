@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#680" />
+    <title>Implement a tun/tap device in go</title>
+    <meta
+      name="description"
+      content="This post describes my understanding to implement tun/tap device in go"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/prism-base16-monokai.dark.css"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.xml"
+      type="application/atom+xml"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.json"
+      type="application/json"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "forest",
+      });
+    </script>
+
+    
+  </head>
+  <body>
+    <div class="topnav">
+      <div class="topnav-content">
+        <a href="/" style="vertical-align: middle">
+          <img
+            src="/img/home.svg"
+            alt="home icon"
+            align="middle"
+            height="18"
+            width="18"
+          />
+          <span>Kha</span>
+        </a>
+        <a href="/research">Research</a>
+        <a href="/blog">Blog</a>
+
+        <div class="topnav-right">
+          <a
+            href="https://github.com/lotusirous"
+            target="_blank"
+            rel="noreferrer"
+            title="Github"
+            ><img
+              alt="Github"
+              src="/img/social/github.svg"
+              height="20"
+              width="20"
+          /></a>
+          <a
+            href="https://twitter.com/__ngtrongkha"
+            target="_blank"
+            rel="noreferrer"
+            title="Twitter"
+            ><img
+              alt="Twitter"
+              src="/img/social/twitter.svg"
+              height="20"
+              width="20"
+          /></a>
+          <a
+            href="https://unix.stackexchange.com/users/40333/lotusirous"
+            target="_blank"
+            rel="noreferrer"
+            title="StackExchange"
+            ><img
+              alt="StackExchange"
+              class="keep-original"
+              src="/img/social/Stack_Exchange_icon.svg"
+              height="20"
+              width="20"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div id="main">
+        <main><div class="article">
+
+<h1 class="post-title">Implement a tun/tap device in go</h1>
+<div class="when">
+  <time datetime="Sunday, March 27, 2022">Posted on Sunday, March 27, 2022</time>
+</div>
+
+
+<p>This post belongs to a low-level networking series with Golang in which I describes the low-level linux networking implementation</p>
+<h2>Background</h2>
+<p>TUN/TAP provides packet reception and transmission for user-space program.</p>
+<p>In order to use the driver a program has to open <code>/dev/net/tun</code> and issue a corresponding <code>ioctl()</code> to register a network device with the kernel</p>
+<h2>Implementation</h2>
+<p>The device interface</p>
+<pre class="language-go"><code class="language-go"><br><span class="token comment">// Device represents a network device</span><br><span class="token keyword">type</span> Device <span class="token keyword">interface</span> <span class="token punctuation">{</span><br>    <span class="token function">File</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span>os<span class="token punctuation">.</span>File<br><span class="token punctuation">}</span></code></pre>
+<h2>Specification</h2>
+<p>The original specification from <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt">linux</a></p>
+
+
+<div class="direction"><div class="previous"> <a href="/posts/flare-on-challenge-1/">[Flare on 2020] Level 1</a> »</div>
+</div>
+
+</div>
+</main>
+      </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>

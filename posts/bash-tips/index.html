@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bash tips &amp; tricks</title>
+    <meta name="description" content="While you are doing awesome stuff, some noisy things bother you. The following tips might help you out">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Kha&#39;s - Journeys and times of me">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Kha&#39;s - Journeys and times of me">
+    <link rel="stylesheet" href="/css/index.css">
+    
+
+  </head>
+  <body>
+
+    <div class="topnav">
+        <a href="/" style="vertical-align:middle">
+          <img src="/img/home.svg" align="middle" height="18" width="18">
+          <span>Kha</span>
+        </a>
+
+      <div class="topnav-right">
+        <a href="/research">Research</a>
+        <a href="/blog">Blog</a>
+      </div>
+    </div>
+
+    <div id="content">
+        <div id="main">
+          <main>
+            <div class="article">
+
+<h1 class="post-title">Bash tips &amp; tricks</h1>
+<div class="when">
+  <time datetime="Wednesday, June 24, 2020">Posted on Wednesday, June 24, 2020</time>
+</div>
+
+
+<p>While you are doing awesome stuff, some noisy things bother you. The following tips might help you out.</p>
+<h2>Skip the first line from output</h2>
+<p>You want to skip the first line from the output for parsing JSON with jq command.</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<br>skip me please<br>{<br>  "hello": "world"<br>}<br>EOF</span></code></pre>
+<p>You can do it with <code>awk</code> - a utility tool installed in many Linux distributions. It includes a built-in row number variable <code>NR</code> to skip.<br>
+For example, <code>NR&gt;1</code> is an action to skip a 1 row from the beginning.</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">|</span><span class="token function">awk</span> <span class="token string">"NR>1"</span> <span class="token operator">|</span>jq</span><br>skip me please<br>{<br>  "hello": "world"<br>}<br>EOF</span></code></pre>
+<p>Now, the JSON output can be parsed by <code>jq</code></p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"hello"</span><span class="token operator">:</span> <span class="token string">"world"</span><br><span class="token punctuation">}</span></code></pre>
+<p>Print all docker images and its tag</p>
+<pre class="language-bash"><code class="language-bash">docker images <span class="token operator">|</span><span class="token function">awk</span> <span class="token string">'NR>1 {print $1":"$2}'</span></code></pre>
+<ul>
+<li><code>NR&gt;1</code> skips the output header <code>REPOSITORY:TAG</code> from <code>docker images</code></li>
+<li>Concatenate 2 columns with <code>&quot;:&quot;</code></li>
+</ul>
+
+
+<div class="direction"><div class="next">« <a href="/posts/flask-session/">Default flask session is insecure</a></div><div class="previous"> <a href="/posts/data-mapper-go/">Build a micro ORM in Golang</a> »</div>
+</div>
+
+</div>
+
+          </main>
+        </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>

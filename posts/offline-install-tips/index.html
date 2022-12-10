@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install packages offline on RHEL-based distribution</title>
+    <meta name="description" content="Sometimes, you want to install a software in old-school style without Internet.">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Kha&#39;s - Journeys and times of me">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Kha&#39;s - Journeys and times of me">
+    <link rel="stylesheet" href="/css/index.css">
+    
+
+  </head>
+  <body>
+
+    <div class="topnav">
+        <a href="/" style="vertical-align:middle">
+          <img src="/img/home.svg" align="middle" height="18" width="18">
+          <span>Kha</span>
+        </a>
+
+      <div class="topnav-right">
+        <a href="/research">Research</a>
+        <a href="/blog">Blog</a>
+      </div>
+    </div>
+
+    <div id="content">
+        <div id="main">
+          <main>
+            <div class="article">
+
+<h1 class="post-title">Install packages offline on RHEL-based distribution</h1>
+<div class="when">
+  <time datetime="Saturday, January 14, 2017">Posted on Saturday, January 14, 2017</time>
+</div>
+
+
+<p>This post shows contains some notes to install packages on RHEL server.</p>
+<!--more-->
+<h2>Download and install packages for RHEL distribution</h2>
+<p>Before downloading packages, you need to check the pre-installed packages and OS version (including minor version). The OS on target machine might use <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/installation_guide/sn-automating-installation">automate installation with kickstart</a> method by default. Thus, you can replicate the environment by downloading the same OS version and selecting the pre-installed packages in <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-package-selection-x86">software selection step</a> from the file <code>/root/anaconda-ks.cfg</code>. For example, the target OS used <em>minimal</em> install base environment and <code>kexec-tools</code>.</p>
+<pre class="language-text"><code class="language-text">%packages<br>@^minimal<br>@core<br>kexec-tools</code></pre>
+<p>Then, you can download required packages with the following command</p>
+<pre class="language-bash"><code class="language-bash">yum <span class="token function">install</span> --downloadonly --downloaddir<span class="token operator">=</span><span class="token operator">&lt;</span>directory<span class="token operator">></span> <span class="token operator">&lt;</span>package<span class="token operator">></span><br>yum --disablerepo<span class="token operator">=</span>* localinstall *.rpm</code></pre>
+<h2>Install python package from local</h2>
+<p>The following command installs <code>keras</code> package from local</p>
+<pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> --no-index --find-links <span class="token builtin class-name">.</span> keras</code></pre>
+
+
+<div class="direction"><div class="next">« <a href="/posts/pretty-json-inside-vim/">Pretty JSON inside Vim</a></div>
+</div>
+
+</div>
+
+          </main>
+        </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>

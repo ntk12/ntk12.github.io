@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Montserrat&family=PT+Serif&family=Roboto:wght@300&family=Zilla+Slab&display=swap");
+
+$code-font: "IBM Plex Mono", Menlo, Monaco, "Courier New", Courier, monospace;
+$body-font: Arial, Helvetica, sans-serif;
+
+$post-title: "Zilla Slab", Georgia, Times, "Times New Roman", serif;
+$header-font: "Montserrat", "Century Gothic", Arial, Helvetica, sans-serif;
+
+.topnav-content {
+  margin: auto;
+  max-width: 900px;
+  padding-right: 10px;
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+  img {
+    vertical-align: text-top;
+  }
+  span {
+    font-size: 16px;
+    vertical-align: middle;
+  }
+
+  a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    &:hover {
+      background-color: #680;
+      color: white;
+    }
+    &:active {
+      background-color: #680;
+      color: white;
+    }
+  }
+}
+
+.topnav-right {
+  float: right;
+}
+
+.direction {
+  margin-bottom: 8em;
+  margin-top: 2em;
+  .next {
+    float: left;
+  }
+  .previous {
+    float: right;
+  }
+}
+
+html {
+  background: #eeeee6 url(/img/bg.png);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $body-font;
+  background-size: 1600px 200px;
+  color: #333;
+  line-height: 1.7;
+  min-height: calc(100vh - 24px);
+}
+img {
+  border: 0;
+}
+figcaption {
+  font-style: italic;
+  font-size: 90%;
+}
+p {
+  margin-bottom: 1.5em;
+}
+a {
+  color: #680;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+  &:hover {
+    text-decoration: none;
+  }
+  &:focus {
+    background-color: rgba(51, 51, 51, 0.1);
+  }
+}
+blockquote {
+  font-style: italic;
+  font-size: 95%;
+  border-left: 6px solid #ccc;
+  margin: 0;
+  padding-left: 20px;
+  margin-bottom: 1em;
+}
+cite {
+  line-height: 3;
+}
+pre {
+  margin-left: -20px;
+  border-radius: 0.5rem;
+  code {
+    display: block;
+    margin-left: 20px;
+    font-size: 90%;
+    background-color: rgba(255, 255, 255, 0.5);
+    overflow: auto;
+  }
+}
+code {
+  padding: 2px 4px;
+  font-size: 85%;
+  font-family: $code-font;
+  font-weight: 400;
+  background-color: #e0e0d3;
+  border-radius: 5px;
+}
+table {
+  border: 1px solid #666;
+  border-width: 1px 0;
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 30px;
+  font-size: 90%;
+}
+th {
+  border: 1px solid #666;
+  border-width: 1px 0;
+  background-color: rgba(51, 51, 51, 0.1);
+}
+td {
+  border: 1px solid #ccc;
+  border-width: 1px 0;
+  padding: 2px 10px;
+}
+.update {
+  background-color: rgba(33, 129, 66, 0.1);
+  padding: 5px 10px 1px;
+  border-radius: 5px;
+}
+
+#header {
+  font-family: $header-font;
+  font-size: 13px;
+  margin: auto;
+  padding: 20px;
+  line-height: 12px;
+  font-weight: 400;
+  a {
+    text-decoration: none;
+    color: #333;
+    &:hover {
+      color: #680;
+    }
+  }
+  h1 {
+    color: #680;
+    padding-top: 18px;
+    text-transform: uppercase;
+  }
+  h2 {
+    a {
+      display: block;
+      margin-top: 0.3em;
+    }
+  }
+  .nav {
+    text-transform: uppercase;
+    word-spacing: 4px;
+  }
+}
+
+#content {
+  max-width: 900px;
+  margin: 4em auto;
+  @media only screen and (max-width: 550px) {
+    max-width: 90%;
+  }
+}
+
+main {
+  h2 {
+    font-weight: 900;
+    font-size: 28px;
+    margin: auto;
+    font-family: $post-title;
+    line-height: 1.1;
+    a {
+      text-decoration: none;
+      color: #444;
+      &:hover {
+        color: #680;
+      }
+    }
+  }
+  .post-by-year {
+    font-size: 100%;
+    a {
+      font-size: 100%;
+    }
+  }
+
+  .article {
+    font-size: 110%;
+
+    .post-title {
+      margin: auto;
+      text-align: center;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2em;
+      margin: 0 0 1.5em;
+      font-family: $post-title;
+    }
+
+    .when {
+      font-family: $post-title;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #666;
+      padding-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: $post-title;
+      font-weight: 900;
+      font-size: 1.5em;
+      text-transform: none;
+      background: none;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+    margin-bottom: 40px;
+    padding: 0 20px;
+    &:first-child {
+      background: none;
+    }
+    img {
+      max-width: 100%;
+      max-height: 80vh;
+    }
+    .abstract {
+      font-size: 110%;
+    }
+  }
+  .fullarticle {
+    text-align: right;
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #680;
+      font-size: 14px;
+      padding: 4px;
+      &:hover {
+        background-color: rgba(51, 51, 51, 0.1);
+      }
+    }
+  }
+  .meta {
+    padding-left: 20px;
+    margin-top: 40px;
+  }
+}
+#footer {
+  clear: both;
+  font-size: 90%;
+  margin-bottom: -12px;
+}

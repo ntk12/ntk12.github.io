@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="100px" viewBox="0 0 75 75" version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="ln">
+      <path d="M173.994,247.702 C173.994,247.702 198.069,191.923 116.796,137.548 C35.524,83.171 11.82,54.472 1,0" transform="scale(.2)" stroke="#69737B" stroke-width="0.25" fill="none" fill-rule="evenodd"></path>
+    </symbol>
+  </defs>
+  <g transform="translate(0 -20)" opacity=".2">
+    <g transform="scale(3,2)">
+      <g id="ln1">
+        <use xlink:href="#ln" x="0" y="0"/>
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(3)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(6)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(9)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(12)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(15)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(18)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(21)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(24)" />
+        <use xlink:href="#ln" x="0" y="0" transform="rotate(27)" />
+      </g>
+      <use xlink:href="#ln1" x="0" y="0" transform="rotate(30)" />
+      <use xlink:href="#ln1" x="0" y="0" transform="rotate(60)" />
+      <use xlink:href="#ln1" x="0" y="0" transform="rotate(90)" />
+      <use xlink:href="#ln1" x="0" y="0" transform="rotate(300)"/>
+      <use xlink:href="#ln1" x="0" y="0" transform="rotate(330)"/>
+    </g>
+  </g>
+</svg>
