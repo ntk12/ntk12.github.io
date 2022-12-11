@@ -109,9 +109,7 @@ handling in Go.&lt;/p&gt;
 		<link href="https://lotusirous.github.io/posts/flare-on-challenge-1/"/>
 		<updated>2020-10-17T00:00:00Z</updated>
 		<id>https://lotusirous.github.io/posts/flare-on-challenge-1/</id>
-		<content type="html">&lt;p&gt;This article belongs to the flare on write up series&lt;/p&gt;
-&lt;h2&gt;Level 1&lt;/h2&gt;
-&lt;p&gt;This challenge is a python that have compiled to windows program. The organizer
+		<content type="html">&lt;p&gt;This challenge is a python that have compiled to windows program. The organizer
 also gives us a source code of this program. Let&#39;s dive into the code by static
 analysis. We have the following functions&lt;/p&gt;
 &lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt; +buy_click : function&lt;br /&gt; +cat_clicked : function&lt;br /&gt; +decode_flag : function &amp;lt;--&lt;br /&gt; +game_screen : function&lt;br /&gt; +main : function&lt;br /&gt; +password_check : function &amp;lt;--&lt;br /&gt; +password_fail_screen : function&lt;br /&gt; +password_screen : function&lt;br /&gt; +victory_screen : function&lt;br /&gt;▼ variables&lt;br /&gt;    buying&lt;br /&gt;    current_autoclickers&lt;br /&gt;    current_coins&lt;/code&gt;&lt;/pre&gt;
