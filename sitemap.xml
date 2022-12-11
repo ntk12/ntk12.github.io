@@ -37,11 +37,6 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/tags/hacks/</loc>
-    <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lotusirous.github.io/tags/tips/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
@@ -53,6 +48,11 @@
   
   <url>
     <loc>https://lotusirous.github.io/tags/golang/</loc>
+    <lastmod>2021-10-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lotusirous.github.io/tags/hacks/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
   
