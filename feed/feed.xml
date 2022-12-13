@@ -17,7 +17,11 @@
 		<link href="https://lotusirous.github.io/posts/byte-order-in-go/"/>
 		<updated>2022-12-13T00:00:00Z</updated>
 		<id>https://lotusirous.github.io/posts/byte-order-in-go/</id>
-		<content type="html">&lt;p&gt;Byte order, also known as endianness, refers to the way in which a computer
+		<content type="html">&lt;p&gt;The &lt;a href=&quot;https://github.com/josharian/native&quot;&gt;native package&lt;/a&gt; contains a method for
+detecting byte order in Go. While this can sometimes lead to program portability
+issues, understanding how the package works can greatly improve the developer
+experience.&lt;/p&gt;
+&lt;p&gt;Byte order, also known as endianness, refers to the way in which a computer
 stores the individual bytes of a multi-byte data type in its memory.
 Little-endian systems store the least significant byte at the lowest memory
 address, while big-endian systems store the most significant byte at the lowest
