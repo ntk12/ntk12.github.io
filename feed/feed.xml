@@ -34,7 +34,7 @@ detect the byte order of the system. The &lt;code&gt;0xff&lt;/code&gt; value is 
 consists of all 1 bits, which means that the most significant bit of the value
 will be set to 1.&lt;/p&gt;
 &lt;p&gt;In a big-endian system, the most significant byte (which in this case would be
-&lt;code&gt;0xff)&lt;/code&gt; would be stored at the lowest memory address. Therefore, if the byte
+&lt;code&gt;0xff&lt;/code&gt;) would be stored at the lowest memory address. Therefore, if the byte
 pointed to by the &lt;code&gt;unsafe.Pointer&lt;/code&gt; function is equal to 0, it means that the
 system is using a big-endian byte order because the &lt;code&gt;0xff&lt;/code&gt; value has been
 &amp;quot;truncated&amp;quot; to just &lt;code&gt;0x00&lt;/code&gt; due to the fact that the system is only storing the
