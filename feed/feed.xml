@@ -5,7 +5,7 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2022-12-01T00:00:00Z</updated>
+	<updated>2022-12-13T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
@@ -13,20 +13,9 @@
 	</author>
 	
 	<entry>
-		<title>Golink - URL shorten service</title>
-		<link href="https://lotusirous.github.io/posts/golink/"/>
-		<updated>2022-12-01T00:00:00Z</updated>
-		<id>https://lotusirous.github.io/posts/golink/</id>
-		<content type="html">&lt;p&gt;This is the note that I have learn from analyzing pro golang code. The first
-post in this series is &lt;code&gt;golink&lt;/code&gt;.&lt;/p&gt;
-&lt;h1&gt;Golink&lt;/h1&gt;
-</content>
-	</entry>
-	
-	<entry>
 		<title>Detect byte order in Go</title>
 		<link href="https://lotusirous.github.io/posts/byte-order-in-go/"/>
-		<updated>2022-12-01T00:00:00Z</updated>
+		<updated>2022-12-13T00:00:00Z</updated>
 		<id>https://lotusirous.github.io/posts/byte-order-in-go/</id>
 		<content type="html">&lt;p&gt;Byte order, also known as endianness, refers to the way in which a computer
 stores the individual bytes of a multi-byte data type in its memory.
@@ -46,6 +35,17 @@ pointed to by the &lt;code&gt;unsafe.Pointer&lt;/code&gt; function is equal to 0
 system is using a big-endian byte order because the 0xff value has been
 &amp;quot;truncated&amp;quot; to just &lt;code&gt;0x00&lt;/code&gt; due to the fact that the system is only storing the
 least significant byte at the lowest memory address.&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Golink - URL shorten service</title>
+		<link href="https://lotusirous.github.io/posts/golink/"/>
+		<updated>2022-12-01T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/golink/</id>
+		<content type="html">&lt;p&gt;This is the note that I have learn from analyzing pro golang code. The first
+post in this series is &lt;code&gt;golink&lt;/code&gt;.&lt;/p&gt;
+&lt;h1&gt;Golink&lt;/h1&gt;
 </content>
 	</entry>
 	
