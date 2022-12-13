@@ -42,6 +42,11 @@
   </url>
   
   <url>
+    <loc>https://lotusirous.github.io/tags/golang/</loc>
+    <lastmod>2021-10-17</lastmod>
+  </url>
+  
+  <url>
     <loc>https://lotusirous.github.io/tags/tips/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
@@ -52,13 +57,13 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/tags/golang/</loc>
-    <lastmod>2021-10-17</lastmod>
+    <loc>https://lotusirous.github.io/posts/function-snippet-for-go/</loc>
+    <lastmod>2022-05-28</lastmod>
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/posts/function-snippet-for-go/</loc>
-    <lastmod>2022-05-28</lastmod>
+    <loc>https://lotusirous.github.io/posts/byte-order-in-go/</loc>
+    <lastmod>2022-12-01</lastmod>
   </url>
   
   <url>
