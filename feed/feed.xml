@@ -5,7 +5,7 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2022-12-13T00:00:00Z</updated>
+	<updated>2022-12-20T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
@@ -15,7 +15,7 @@
 	<entry>
 		<title>Zero allocated byte to string conversion in Go</title>
 		<link href="https://lotusirous.github.io/posts/zero-allocated-byte-to-string/"/>
-		<updated>2022-12-13T00:00:00Z</updated>
+		<updated>2022-12-20T00:00:00Z</updated>
 		<id>https://lotusirous.github.io/posts/zero-allocated-byte-to-string/</id>
 		<content type="html">&lt;p&gt;Go has a built-in function for converting a slice of bytes to a string, but it involves allocating a new string. If you want to avoid this allocation, you can use a trick that involves the &lt;code&gt;unsafe&lt;/code&gt; package.&lt;/p&gt;
 &lt;p&gt;I recently learned about this trick from a &lt;a href=&quot;https://twitter.com/juliusvolz/status/1603052194944913409?s=20&amp;amp;t=33gnYg4Lbl6dRMzZFu8X0w&quot;&gt;tweet&lt;/a&gt; in &lt;a href=&quot;https://github.com/prometheus/prometheus/blob/e1b708200853371517480176da0a03437b3bb2c2/tsdb/index/index.go#L1906&quot;&gt;prometheus repository&lt;/a&gt; and followed &lt;a href=&quot;https://github.com/golang/go/issues/25484&quot;&gt;the discussion on Github&lt;/a&gt;. It turns out that this trick was originally used in the &lt;a href=&quot;https://go.dev/src/strings/builder.go#L45&quot;&gt;&lt;code&gt;strings&lt;/code&gt; package&lt;/a&gt;, and it works by using type coercion to convert the memory address of the slice to a string pointer, and then dereferencing that pointer to get the string value. Here is the code:&lt;/p&gt;
