@@ -55,6 +55,19 @@ memory.&lt;/p&gt;
 string can lead to unpredictable behavior and can compromise the safety
 guarantees provided by Go. It may also produce incorrect results if the slice of
 bytes does not have the correct memory layout or encoding&lt;/p&gt;
+&lt;h2&gt;The new way in go 1.20&lt;/h2&gt;
+&lt;p&gt;Go 1.20 includes &lt;a href=&quot;https://github.com/golang/go/issues/53003&quot;&gt;a new way to converts bytes to string&lt;/a&gt; by &lt;a href=&quot;https://go-review.googlesource.com/c/go/+/427095&quot;&gt;the commit&lt;/a&gt; as follows:&lt;/p&gt;
+&lt;p&gt;``go
+func ByteSlice2String(b []byte) string {
+if len(b) == 0 {
+return &amp;quot;&amp;quot;
+}
+return unsafe.String(&amp;amp;b[0], len(b))
+}&lt;/p&gt;
+&lt;p&gt;func String2ByteSlice(s string) []byte {
+return unsafe.Slice(unsafe.StringData(s), len(s))
+}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;
 </content>
 	</entry>
 	
