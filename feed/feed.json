@@ -9,6 +9,12 @@
     "url": "https://lotusirous.github.io/about-me/"
   },
   "items": [{
+      "id": "https://lotusirous.github.io/posts/zP-in-vim/",
+      "url": "https://lotusirous.github.io/posts/zP-in-vim/",
+      "title": "`zy` and `zp` in recent vim ",
+      "content_html": "<p>This task is very common for manipulating the column</p>\n<p>Set 1:</p>\n<pre><code>|of lines.\n|different lengths.\n|now together.\n</code></pre>\n<p>Set 2:</p>\n<pre><code>My blocks\nAll have\nBut are\n</code></pre>\n<p>Result:</p>\n<pre><code>My blocks|of lines.\nAll have|different lengths.\nBut are|now together.\n</code></pre>\n<p>The steps as follows:</p>\n<ul>\n<li>Use <code>c-v</code> and <code>D</code> to copy the line in column from Set 2.</li>\n<li>Go the the first line of Set 1 and paste with <code>zP</code></li>\n</ul>\n",
+      "date_published": "2023-02-08T00:00:00Z"
+    },{
       "id": "https://lotusirous.github.io/posts/zero-allocated-byte-to-string/",
       "url": "https://lotusirous.github.io/posts/zero-allocated-byte-to-string/",
       "title": "Zero allocated byte to string conversion in Go",
