@@ -62,16 +62,6 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/tags/algorithm/</loc>
-    <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lotusirous.github.io/tags/data-structure/</loc>
-    <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lotusirous.github.io/posts/function-snippet-for-go/</loc>
     <lastmod>2022-05-28</lastmod>
   </url>
@@ -94,15 +84,5 @@
   <url>
     <loc>https://lotusirous.github.io/posts/zP-in-vim/</loc>
     <lastmod>2023-02-08</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lotusirous.github.io/posts/sparse-data-structure/</loc>
-    <lastmod>2023-04-18</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lotusirous.github.io/posts/mid-stack-inliner/</loc>
-    <lastmod>2023-05-03</lastmod>
   </url>
 </urlset>

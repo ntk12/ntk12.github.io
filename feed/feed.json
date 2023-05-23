@@ -9,18 +9,6 @@
     "url": "https://lotusirous.github.io/about-me/"
   },
   "items": [{
-      "id": "https://lotusirous.github.io/posts/mid-stack-inliner/",
-      "url": "https://lotusirous.github.io/posts/mid-stack-inliner/",
-      "title": "",
-      "content_html": "",
-      "date_published": "2023-05-03T03:54:02Z"
-    },{
-      "id": "https://lotusirous.github.io/posts/sparse-data-structure/",
-      "url": "https://lotusirous.github.io/posts/sparse-data-structure/",
-      "title": "An efficient representation of sparse set",
-      "content_html": "<p>Sets are the fundamental structure of programming. Using the sets depends on the\nproblem kind. I found this sparse set representation from the golang codebase.\nThis is one of the gem that worth for study.</p>\n<p>The sparse implementation offer a constant time to clear-set, add-member, and\ndelete-member.</p>\n<pre class=\"language-go\"><code class=\"language-go\">dense <span class=\"token operator\">:=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token builtin\">int</span><span class=\"token punctuation\">{</span><span class=\"token number\">5</span><span class=\"token punctuation\">,</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span><span class=\"token number\">4</span><span class=\"token punctuation\">}</span></code></pre>\n",
-      "date_published": "2023-04-18T00:00:00Z"
-    },{
       "id": "https://lotusirous.github.io/posts/zP-in-vim/",
       "url": "https://lotusirous.github.io/posts/zP-in-vim/",
       "title": "`zy` and `zp` in recent vim ",

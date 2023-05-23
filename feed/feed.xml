@@ -5,34 +5,12 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2023-05-03T03:54:02Z</updated>
+	<updated>2023-02-08T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
 		<email>youremailaddress@example.com</email>
 	</author>
-	
-	<entry>
-		<title></title>
-		<link href="https://lotusirous.github.io/posts/mid-stack-inliner/"/>
-		<updated>2023-05-03T03:54:02Z</updated>
-		<id>https://lotusirous.github.io/posts/mid-stack-inliner/</id>
-		<content type="html"></content>
-	</entry>
-	
-	<entry>
-		<title>An efficient representation of sparse set</title>
-		<link href="https://lotusirous.github.io/posts/sparse-data-structure/"/>
-		<updated>2023-04-18T00:00:00Z</updated>
-		<id>https://lotusirous.github.io/posts/sparse-data-structure/</id>
-		<content type="html">&lt;p&gt;Sets are the fundamental structure of programming. Using the sets depends on the
-problem kind. I found this sparse set representation from the golang codebase.
-This is one of the gem that worth for study.&lt;/p&gt;
-&lt;p&gt;The sparse implementation offer a constant time to clear-set, add-member, and
-delete-member.&lt;/p&gt;
-&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;dense &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-</content>
-	</entry>
 	
 	<entry>
 		<title>`zy` and `zp` in recent vim </title>
