@@ -78,20 +78,17 @@ dst &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=
 		<id>https://lotusirous.github.io/posts/zP-in-vim/</id>
 		<content type="html">&lt;p&gt;This task is very common for manipulating the column&lt;/p&gt;
 &lt;p&gt;Set 1:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;|of lines.
+&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;|of lines.
 |different lengths.
-|now together.
-&lt;/code&gt;&lt;/pre&gt;
+|now together.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Set 2:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;My blocks
+&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;My blocks
 All have
-But are
-&lt;/code&gt;&lt;/pre&gt;
+But are&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Result:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;My blocks|of lines.
+&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;My blocks|of lines.
 All have|different lengths.
-But are|now together.
-&lt;/code&gt;&lt;/pre&gt;
+But are|now together.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The steps as follows:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Use &lt;code&gt;c-v&lt;/code&gt; and &lt;code&gt;D&lt;/code&gt; to copy the line in column from Set 2.&lt;/li&gt;
@@ -101,7 +98,7 @@ But are|now together.
 	</entry>
 	
 	<entry>
-		<title>Zero allocated byte to string conversion in Go</title>
+		<title>Zero allocated byte to string conversion</title>
 		<link href="https://lotusirous.github.io/posts/zero-allocated-byte-to-string/"/>
 		<updated>2022-12-20T00:00:00Z</updated>
 		<id>https://lotusirous.github.io/posts/zero-allocated-byte-to-string/</id>
