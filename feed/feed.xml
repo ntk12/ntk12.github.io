@@ -5,12 +5,71 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2023-02-08T00:00:00Z</updated>
+	<updated>2023-06-17T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
 		<email>youremailaddress@example.com</email>
 	</author>
+	
+	<entry>
+		<title>encoding/json is weird</title>
+		<link href="https://lotusirous.github.io/posts/the-weird-thing-in-go-json/"/>
+		<updated>2023-06-17T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/the-weird-thing-in-go-json/</id>
+		<content type="html">&lt;p&gt;Let&#39;s consider the following snippet&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; main
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;encoding/json&quot;&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;log&quot;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Header &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	Alg &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;`json:&quot;alg&quot;`&lt;/span&gt;
+	Typ &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;`json:&quot;typ&quot;`&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	b &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;`{&quot;typ&quot;:&quot;JWS&quot;,&quot;alg&quot;:&quot;HS256&quot;,&quot;ALG&quot;:&quot;none&quot;}`&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; h Header
+	&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; err &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; json&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Unmarshal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;h&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; err &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		log&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Fatal&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+	fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;%+v&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; h&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The result is surprising : &lt;code&gt;{Alg:none Typ:JWS}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This cause an security issue for token verification in JWT&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Slice tricks in go</title>
+		<link href="https://lotusirous.github.io/posts/slice-tricks/"/>
+		<updated>2023-06-04T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/slice-tricks/</id>
+		<content type="html">&lt;p&gt;In go, a slice is a data structure that holds a backed array, plus its length
+and capacity. It performs a actions for adding a new element and shrinking the
+element if the backed array is almost empty. This post introduces a few tricks
+that you can use and reduce a little time for writing code.&lt;/p&gt;
+&lt;h2&gt;Append a slice&lt;/h2&gt;
+&lt;p&gt;We usually write the code for appending a slice as below.&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; s &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
+s &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, we also can do this to reduce 1 line of code.&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;s &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The syntax &lt;code&gt;[]string(nil)&lt;/code&gt; is a syntactic sugar because we can pass a nil slice
+in a single line with &lt;code&gt;append&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Copy a slice&lt;/h2&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; src &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;
+dst &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;src&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;dst&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; src&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or we can do&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; d &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;d&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;baz&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>`zy` and `zp` in recent vim </title>
@@ -100,8 +159,7 @@ string value that it points to.&lt;/li&gt;
         &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
         b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;ReportAllocs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Benchmark result shows that the function &lt;code&gt;ByteSlice2String&lt;/code&gt; has zero allocation
 memory.&lt;/p&gt;
 &lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;goos: darwin
@@ -121,7 +179,11 @@ string can lead to unpredictable behavior and can compromise the safety
 guarantees provided by Go. It may also produce incorrect results if the slice of
 bytes does not have the correct memory layout or encoding&lt;/p&gt;
 &lt;h2&gt;The new way in go 1.20&lt;/h2&gt;
-&lt;p&gt;Go 1.20 adds &lt;a href=&quot;https://github.com/golang/go/issues/53003&quot;&gt;&lt;code&gt;SliceData&lt;/code&gt;, &lt;code&gt;String&lt;/code&gt;, and &lt;code&gt;StringData&lt;/code&gt;&lt;/a&gt; which supports our cases in &lt;a href=&quot;https://go-review.googlesource.com/c/go/+/427095&quot;&gt;the CL&lt;/a&gt;. You can use the new function as follows:&lt;/p&gt;
+&lt;p&gt;Go 1.20 adds
+&lt;a href=&quot;https://github.com/golang/go/issues/53003&quot;&gt;&lt;code&gt;SliceData&lt;/code&gt;, &lt;code&gt;String&lt;/code&gt;, and &lt;code&gt;StringData&lt;/code&gt;&lt;/a&gt;
+which supports our cases in
+&lt;a href=&quot;https://go-review.googlesource.com/c/go/+/427095&quot;&gt;the CL&lt;/a&gt;. You can use the new
+function as follows:&lt;/p&gt;
 &lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;ByteSlice2String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;
@@ -433,68 +495,6 @@ one, and the error will return from the &lt;code&gt;Run() error&lt;/code&gt; fun
         &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; err
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>Generate return values in Neovim for Go.</title>
-		<link href="https://lotusirous.github.io/posts/function-snippet-for-go/"/>
-		<updated>2022-05-28T00:00:00Z</updated>
-		<id>https://lotusirous.github.io/posts/function-snippet-for-go/</id>
-		<content type="html">&lt;p&gt;I&#39;m a big fan of error handling in Go because of its clarity and simplicity.
-However, I sometimes find it tedious to have to type &lt;code&gt;if err != nil&lt;/code&gt; for every
-error handling error. That&#39;s why I&#39;m excited to share with you a new technique
-that I&#39;ve discovered for reducing the number of keystrokes needed for error
-handling in Go. By combining the
-&lt;a href=&quot;https://github.com/nvim-treesitter/nvim-treesitter&quot;&gt;nvim-treesitter&lt;/a&gt; and
-&lt;a href=&quot;https://github.com/L3MON4D3/LuaSnip&quot;&gt;LuaSnip&lt;/a&gt; tools, you can easily generate
-the return values for your error handling errors, saving you time and making
-your code more efficient.&lt;/p&gt;
-&lt;p&gt;In this post, I&#39;ll explain how to set up and use this technique, so that you can
-enjoy the benefits of error handling in Go without all the tedious typing.&lt;/p&gt;
-&lt;h2&gt;Tree-sitter and LuaSnip&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Tree-sitter&lt;/strong&gt; is a parser generator tool that can build parsers for
-programming languages. It uses incremental parsing to quickly and accurately
-parse source code as it is being edited. In Go, tree-sitter can generate an
-abstract syntax tree (AST) for a Go source file, which can be used for code
-analysis, code completion, or code generation.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;LuaSnip&lt;/strong&gt; is a neovim plugin that allows users to define and manage code
-snippets using Lua. It can save time and improve productivity by allowing users
-to insert code snippets quickly and easily. It also offers features like
-context-aware expansion, completion, and arguments.&lt;/p&gt;
-&lt;h2&gt;Generate the snippet&lt;/h2&gt;
-&lt;p&gt;This code defines a tree-sitter query for Go source code that uses the &lt;code&gt;set_query&lt;/code&gt; function from the &lt;code&gt;vim.treesitter&lt;/code&gt; module. The query is stored in a variable called &lt;code&gt;LuaSnip_Result&lt;/code&gt;, and it searches for three different types of declarations in Go source code: method declarations, function declarations, and function literals.&lt;/p&gt;
-&lt;p&gt;For each of these declarations, the query stores the result in a variable called &lt;code&gt;@id&lt;/code&gt;, which can be used later to reference the specific declaration that was found. The query uses the tree-sitter query language, which is a syntax for defining and running queries on abstract syntax trees (ASTs) generated by tree-sitter parsers.&lt;/p&gt;
-&lt;p&gt;The second part of the code creates a code snippet called &amp;quot;iferr&amp;quot; that uses the results of the &lt;code&gt;LuaSnip_Result&lt;/code&gt; query to automatically generate the return values for the function or method specified in the &amp;quot;f&amp;quot; input field. This can save you time and effort. When you type &amp;quot;iferr&amp;quot; the result will match the function and returned value from the method.&lt;/p&gt;
-&lt;pre class=&quot;language-lua&quot;&gt;&lt;code class=&quot;language-lua&quot;&gt;vim&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;treesitter&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;set_query&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;go&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;LuaSnip_Result&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;[[
-    (method_declaration result: (_) @id)
-    (function_declaration result: (_) @id)
-    (func_literal result: (_) @id)
-]]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;token function&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;iferr&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;val&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    t &lt;span class=&quot;token string&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;err&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    t &lt;span class=&quot;token string&quot;&gt;&quot; := &quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;f&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;if &quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;same&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot; != nil {&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&#92;treturn &quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; go_ret_vals&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;}&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token function&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let&#39;s give it a try.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;iferr&amp;lt;c-k&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;In conclusion, this post has shown you how to use tree-sitter and LuaSnip to
-create a code snippet for Go development that can automatically generate the
-return values for error handling errors. This technique can improve your
-workflow and make your code more efficient and effective. By using this
-approach, you can reduce the amount of time and effort you spend on error
-handling in Go.&lt;/p&gt;
 </content>
 	</entry>
 	

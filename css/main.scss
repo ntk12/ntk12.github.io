@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Montserrat&family=PT+Serif&family=Roboto:wght@300&family=Zilla+Slab&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bitter&family=Raleway&family=Source+Code+Pro&display=swap');
 
-$code-font: "IBM Plex Mono", Menlo, Monaco, "Courier New", Courier, monospace;
-$body-font: Arial, Helvetica, sans-serif;
+$code-font: "Source Code Pro", Menlo, Monaco, "Courier New", Courier, monospace;
+$body-font: "Raleway",Arial, Helvetica, sans-serif;
 
-$post-title: "Zilla Slab", Georgia, Times, "Times New Roman", serif;
-$header-font: "Montserrat", "Century Gothic", Arial, Helvetica, sans-serif;
+$post-title: "Bitter", Georgia, Times, "Times New Roman", serif;
+$header-font: "Raleway", "Century Gothic", Arial, Helvetica, sans-serif;
 
 .topnav-content {
   margin: auto;
@@ -58,7 +58,7 @@ $header-font: "Montserrat", "Century Gothic", Arial, Helvetica, sans-serif;
 }
 
 html {
-  background: #eeeee6 url(/img/bg.png);
+  background: #333333;
 }
 
 body {
@@ -66,7 +66,8 @@ body {
   padding: 0;
   font-family: $body-font;
   background-size: 1600px 200px;
-  color: #333;
+  // color: #333;
+  color: white;
   line-height: 1.7;
   min-height: calc(100vh - 24px);
 }
@@ -81,7 +82,7 @@ p {
   margin-bottom: 1.5em;
 }
 a {
-  color: #680;
+  color: white;
   -webkit-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
@@ -110,16 +111,15 @@ pre {
     display: block;
     margin-left: 20px;
     font-size: 90%;
-    background-color: rgba(255, 255, 255, 0.5);
     overflow: auto;
   }
 }
 code {
   padding: 2px 4px;
-  font-size: 85%;
+  font-size: 90%;
   font-family: $code-font;
   font-weight: 400;
-  background-color: #e0e0d3;
+  background-color: #272822;
   border-radius: 5px;
 }
 table {
@@ -204,6 +204,9 @@ main {
     font-size: 100%;
     a {
       font-size: 100%;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -223,11 +226,11 @@ main {
     }
 
     .when {
-      font-family: $post-title;
+      font-family: $body-font;
       text-align: center;
       font-size: 15px;
-      font-weight: 700;
-      color: #666;
+      font-weight: 400;
+      color: white;
       padding-bottom: 2rem;
     }
 
