@@ -7,11 +7,6 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/posts/smart-contract-practices/</loc>
-    <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lotusirous.github.io/blog/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
@@ -42,6 +37,11 @@
   </url>
   
   <url>
+    <loc>https://lotusirous.github.io/tags/vim/</loc>
+    <lastmod>2021-10-17</lastmod>
+  </url>
+  
+  <url>
     <loc>https://lotusirous.github.io/tags/tips/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
@@ -49,16 +49,6 @@
   <url>
     <loc>https://lotusirous.github.io/tags/hacks/</loc>
     <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lotusirous.github.io/tags/vim/</loc>
-    <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lotusirous.github.io/posts/golink/</loc>
-    <lastmod>2022-12-01</lastmod>
   </url>
   
   <url>
@@ -77,12 +67,7 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/posts/slice-tricks/</loc>
-    <lastmod>2023-06-04</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lotusirous.github.io/posts/the-weird-thing-in-go-json/</loc>
+    <loc>https://lotusirous.github.io/posts/encoding-json-thing-in-go/</loc>
     <lastmod>2023-06-17</lastmod>
   </url>
 </urlset>
