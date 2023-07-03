@@ -5,12 +5,72 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2023-06-17T00:00:00Z</updated>
+	<updated>2023-07-02T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
 		<email>youremailaddress@example.com</email>
 	</author>
+	
+	<entry>
+		<title>Go linkname directive</title>
+		<link href="https://lotusirous.github.io/posts/golinkname/"/>
+		<updated>2023-07-02T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/golinkname/</id>
+		<content type="html">&lt;h2&gt;&lt;code&gt;go:linkname&lt;/code&gt; directive&lt;/h2&gt;
+&lt;p&gt;The go document says:&lt;/p&gt;
+&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;//go:linkname localname [importpath.name]&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The //go:linkname directive instructs the compiler to use &amp;quot;&lt;a href=&quot;http://importpath.name/&quot;&gt;importpath.name&lt;/a&gt;&amp;quot; as
+the object file symbol name for the variable or function declared as
+&amp;quot;localname&amp;quot; in the source code. If the &amp;quot;&lt;a href=&quot;http://importpath.name/&quot;&gt;importpath.name&lt;/a&gt;&amp;quot; argument is omitted,
+the directive uses the symbol&#39;s default object file symbol name and only has
+the effect of making the symbol accessible to other packages. Because this
+directive can subvert the type system and package modularity, it is only
+enabled in files that have imported &amp;quot;unsafe&amp;quot;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What is the use case of this ?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is only used for accessing unexported function.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It&#39;s primarily a hack that lets certain functions live in the runtime package,
+and access runtime internals, but still pretend that they are unexported
+functions of some different package. Look for the uses of &lt;code&gt;go:linkname&lt;/code&gt; in the
+runtime package itself.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Practice&lt;/h2&gt;
+&lt;p&gt;Let&#39;s make a &lt;code&gt;time&lt;/code&gt; package.&lt;/p&gt;
+&lt;p&gt;Let&#39;s&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; mono
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;unsafe&quot;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// for go:linkname&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;//go:linkname now runtime.nanotime1&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int64&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The benchmark:&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; mono
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;testing&quot;&lt;/span&gt;
+	&lt;span class=&quot;token string&quot;&gt;&quot;time&quot;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkNow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;N&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;BenchmarkTimeNow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;b &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;testing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;N&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; time&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Now&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>encoding/json is weird</title>

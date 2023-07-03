@@ -37,17 +37,17 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/tags/vim/</loc>
-    <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lotusirous.github.io/tags/tips/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
   
   <url>
     <loc>https://lotusirous.github.io/tags/hacks/</loc>
+    <lastmod>2021-10-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lotusirous.github.io/tags/vim/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
   
@@ -69,5 +69,10 @@
   <url>
     <loc>https://lotusirous.github.io/posts/encoding-json-thing-in-go/</loc>
     <lastmod>2023-06-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lotusirous.github.io/posts/golinkname/</loc>
+    <lastmod>2023-07-02</lastmod>
   </url>
 </urlset>
