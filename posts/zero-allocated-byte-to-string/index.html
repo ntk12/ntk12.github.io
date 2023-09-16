@@ -1,13 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#680"><title>Zero allocated byte to string conversion</title><meta name="description" content="Zero allocated byte to string conversion in Go"><link rel="stylesheet" href="/css/prism-base16-monokai.dark.css"><link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Kha&#39;s - Journeys and times of me"><link rel="alternate" href="/feed/feed.json" type="application/json" title="Kha&#39;s - Journeys and times of me"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script><script>mermaid.initialize({
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#680" />
+    <title>Zero allocated byte to string conversion</title>
+    <meta
+      name="description"
+      content="Zero allocated byte to string conversion in Go"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/prism-base16-monokai.dark.css"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.xml"
+      type="application/atom+xml"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.json"
+      type="application/json"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
         startOnLoad: true,
         theme: "forest",
-      });</script></head><body><div class="topnav"><div class="topnav-content"><a href="/" style="vertical-align: middle"><img src="/img/home.svg" alt="home icon" align="middle" height="18" width="18"> <span>Kha</span> </a><a href="/research">Research</a> <a href="/blog">Blog</a><div class="topnav-right"><a href="https://github.com/lotusirous" target="_blank" rel="noreferrer" title="Github"><img alt="Github" src="/img/social/github.svg" height="20" width="20"></a><a href="https://twitter.com/__ngtrongkha" target="_blank" rel="noreferrer" title="Twitter"><img alt="Twitter" src="/img/social/twitter.svg" height="20" width="20"></a></div></div></div><div id="content"><div id="main"><main><div class="article"><div class="when"><time datetime="Dec 20, 2022">Dec 20, 2022</time></div><h1 class="post-title">Zero allocated byte to string conversion</h1><p>Go has a built-in function for converting a slice of bytes to a string, but it involves allocating a new string. If you want to avoid this allocation, you can use a trick that involves the <code>unsafe</code> package.</p><p>I recently learned about this trick from a <a href="https://twitter.com/juliusvolz/status/1603052194944913409?s=20&amp;t=33gnYg4Lbl6dRMzZFu8X0w">tweet</a> in <a href="https://github.com/prometheus/prometheus/blob/e1b708200853371517480176da0a03437b3bb2c2/tsdb/index/index.go#L1906">prometheus repository</a> and followed <a href="https://github.com/golang/go/issues/25484">the discussion on Github</a>. It turns out that this trick was originally used in the <a href="https://go.dev/src/strings/builder.go#L45"><code>strings</code> package</a>, and it works by using type coercion to convert the memory address of the slice to a string pointer, and then dereferencing that pointer to get the string value. Here is the code:</p><pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ByteSlice2String</span><span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+      });
+    </script>
+
+    
+  </head>
+  <body>
+    <div class="topnav">
+      <div class="topnav-content">
+        <a href="/" style="vertical-align: middle">
+          <img
+            src="/img/home.svg"
+            alt="home icon"
+            align="middle"
+            height="18"
+            width="18"
+          />
+          <span>Kha</span>
+        </a>
+        <a href="/research">Research</a>
+        <a href="/blog">Blog</a>
+
+        <div class="topnav-right">
+          <a
+            href="https://github.com/lotusirous"
+            target="_blank"
+            rel="noreferrer"
+            title="Github"
+            ><img
+              alt="Github"
+              src="/img/social/github.svg"
+              height="20"
+              width="20"
+          /></a>
+          <a
+            href="https://twitter.com/__ngtrongkha"
+            target="_blank"
+            rel="noreferrer"
+            title="Twitter"
+            ><img
+              alt="Twitter"
+              src="/img/social/twitter.svg"
+              height="20"
+              width="20"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div id="main">
+        <main><div class="article">
+
+<div class="when">
+  <time datetime="Dec 20, 2022">Dec 20, 2022</time>
+</div>
+<h1 class="post-title">Zero allocated byte to string conversion</h1>
+
+
+<p>Go has a built-in function for converting a slice of bytes to a string, but it
+involves allocating a new string. If you want to avoid this allocation, you can
+use a trick that involves the <code>unsafe</code> package.</p>
+<p>I recently learned about this trick from a
+<a href="https://twitter.com/juliusvolz/status/1603052194944913409?s=20&amp;t=33gnYg4Lbl6dRMzZFu8X0w">tweet</a>
+in
+<a href="https://github.com/prometheus/prometheus/blob/e1b708200853371517480176da0a03437b3bb2c2/tsdb/index/index.go#L1906">prometheus repository</a>
+and followed
+<a href="https://github.com/golang/go/issues/25484">the discussion on Github</a>. It turns
+out that this trick was originally used in the
+<a href="https://go.dev/src/strings/builder.go#L45"><code>strings</code> package</a>, and it works by
+using type coercion to convert the memory address of the slice to a string
+pointer, and then dereferencing that pointer to get the string value. Here is
+the code:</p>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ByteSlice2String</span><span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token string">""</span>
     <span class="token punctuation">}</span>
 
     <span class="token keyword">return</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span></code></pre><p>Here's how it works:</p><ol><li><code>unsafe.Pointer(&amp;bs)</code> takes the memory address of the slice bs and converts it to an <code>unsafe.Pointer</code>. An <code>unsafe.Pointer</code> is a special type in the <code>unsafe</code> package that can hold the address of any type.</li><li><code>(*string)(unsafe.Pointer(&amp;bs))</code> converts the <code>unsafe.Pointer</code> to a string pointer by performing type coercion. This creates a new string pointer that points to the same memory address as the slice <code>bs</code>.</li><li><code>*(*string)(unsafe.Pointer(&amp;bs))</code> dereferences the string pointer to get the string value that it points to.</li></ol><h2>Prove it</h2><p>This experiment shows the benchmark between the <code>string(bs)</code> and our <code>ByteSlice2String</code> function</p><pre class="language-go"><code class="language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Here's how it works:</p>
+<ol>
+<li><code>unsafe.Pointer(&amp;bs)</code> takes the memory address of the slice bs and converts
+it to an <code>unsafe.Pointer</code>. An <code>unsafe.Pointer</code> is a special type in the
+<code>unsafe</code> package that can hold the address of any type.</li>
+<li><code>(*string)(unsafe.Pointer(&amp;bs))</code> converts the <code>unsafe.Pointer</code> to a string
+pointer by performing type coercion. This creates a new string pointer that
+points to the same memory address as the slice <code>bs</code>.</li>
+<li><code>*(*string)(unsafe.Pointer(&amp;bs))</code> dereferences the string pointer to get the
+string value that it points to.</li>
+</ol>
+<h2>Prove it</h2>
+<p>This experiment shows the benchmark between the <code>string(bs)</code> and our
+<code>ByteSlice2String</code> function</p>
+<pre class="language-go"><code class="language-go"><span class="token keyword">var</span> <span class="token punctuation">(</span>
     someBytes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">`hello`</span><span class="token punctuation">)</span>
     str       <span class="token builtin">string</span>
 <span class="token punctuation">)</span>
@@ -26,7 +143,10 @@
         <span class="token punctuation">}</span>
         b<span class="token punctuation">.</span><span class="token function">ReportAllocs</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span></code></pre><p>Benchmark result shows that the function <code>ByteSlice2String</code> has zero allocation memory.</p><pre class="language-txt"><code class="language-txt">goos: darwin
+<span class="token punctuation">}</span></code></pre>
+<p>Benchmark result shows that the function <code>ByteSlice2String</code> has zero allocation
+memory.</p>
+<pre class="language-txt"><code class="language-txt">goos: darwin
 goarch: amd64
 pkg: github.com/ntk12/temp
 cpu: Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz
@@ -36,7 +156,19 @@ BenchmarkBuildString/BuiltIn-16          75249337         15.88 ns/op        5 B
 BenchmarkBuildString/Byte2Slice
 BenchmarkBuildString/Byte2Slice-16       324706618          3.652 ns/op        0 B/op        0 allocs/op
 PASS
-ok   github.com/ntk12/temp 4.461s</code></pre><h2>When this trick goes wrong</h2><p>Using the <code>unsafe</code> package and type coercion to convert a slice of bytes to a string can lead to unpredictable behavior and can compromise the safety guarantees provided by Go. It may also produce incorrect results if the slice of bytes does not have the correct memory layout or encoding</p><h2>The new way in go 1.20</h2><p>Go 1.20 adds <a href="https://github.com/golang/go/issues/53003"><code>SliceData</code>, <code>String</code>, and <code>StringData</code></a> which supports our cases in <a href="https://go-review.googlesource.com/c/go/+/427095">the CL</a>. You can use the new function as follows:</p><pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ByteSlice2String</span><span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+ok   github.com/ntk12/temp 4.461s</code></pre>
+<h2>When this trick goes wrong</h2>
+<p>Using the <code>unsafe</code> package and type coercion to convert a slice of bytes to a
+string can lead to unpredictable behavior and can compromise the safety
+guarantees provided by Go. It may also produce incorrect results if the slice of
+bytes does not have the correct memory layout or encoding</p>
+<h2>The new way in go 1.20</h2>
+<p>Go 1.20 adds
+<a href="https://github.com/golang/go/issues/53003"><code>SliceData</code>, <code>String</code>, and <code>StringData</code></a>
+which supports our cases in
+<a href="https://go-review.googlesource.com/c/go/+/427095">the CL</a>. You can use the new
+function as follows:</p>
+<pre class="language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ByteSlice2String</span><span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token string">""</span>
     <span class="token punctuation">}</span>
@@ -45,4 +177,17 @@ ok   github.com/ntk12/temp 4.461s</code></pre><h2>When this trick goes wrong</h2
 
 <span class="token keyword">func</span> <span class="token function">String2ByteSlice</span><span class="token punctuation">(</span>s <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> unsafe<span class="token punctuation">.</span><span class="token function">Slice</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">StringData</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span></code></pre><div class="direction"><div class="next">« <a href="/posts/zP-in-vim/">`zy` and `zp` in recent vim</a></div><div class="previous"><a href="/posts/byte-order-in-go/">How to Detect Byte Order in Go</a> »</div></div></div></main></div></div><footer></footer></body></html>
+<span class="token punctuation">}</span></code></pre>
+
+
+<div class="direction"><div class="next">« <a href="/posts/zP-in-vim/">`zy` and `zp` in recent vim </a></div><div class="previous"> <a href="/posts/byte-order-in-go/">How to Detect Byte Order in Go</a> »</div>
+</div>
+
+</div>
+</main>
+      </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>

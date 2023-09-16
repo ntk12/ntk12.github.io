@@ -1,7 +1,98 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#680"><title>Flare on 2020 - Level 1</title><meta name="description" content="Flare on 2020 write up"><link rel="stylesheet" href="/css/prism-base16-monokai.dark.css"><link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Kha&#39;s - Journeys and times of me"><link rel="alternate" href="/feed/feed.json" type="application/json" title="Kha&#39;s - Journeys and times of me"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script><script>mermaid.initialize({
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#680" />
+    <title>Flare on 2020 - Level 1</title>
+    <meta
+      name="description"
+      content="Flare on 2020 write up"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/prism-base16-monokai.dark.css"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.xml"
+      type="application/atom+xml"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.json"
+      type="application/json"
+      title="Kha&#39;s - Journeys and times of me"
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
         startOnLoad: true,
         theme: "forest",
-      });</script></head><body><div class="topnav"><div class="topnav-content"><a href="/" style="vertical-align: middle"><img src="/img/home.svg" alt="home icon" align="middle" height="18" width="18"> <span>Kha</span> </a><a href="/research">Research</a> <a href="/blog">Blog</a><div class="topnav-right"><a href="https://github.com/lotusirous" target="_blank" rel="noreferrer" title="Github"><img alt="Github" src="/img/social/github.svg" height="20" width="20"></a><a href="https://twitter.com/__ngtrongkha" target="_blank" rel="noreferrer" title="Twitter"><img alt="Twitter" src="/img/social/twitter.svg" height="20" width="20"></a></div></div></div><div id="content"><div id="main"><main><div class="article"><div class="when"><time datetime="Oct 17, 2020">Oct 17, 2020</time></div><h1 class="post-title">Flare on 2020 - Level 1</h1><p>This challenge is a python that have compiled to windows program. The organizer also gives us a source code of this program. Let's dive into the code by static analysis. We have the following functions</p><pre class="language-txt"><code class="language-txt"> +buy_click : function
+      });
+    </script>
+
+    
+  </head>
+  <body>
+    <div class="topnav">
+      <div class="topnav-content">
+        <a href="/" style="vertical-align: middle">
+          <img
+            src="/img/home.svg"
+            alt="home icon"
+            align="middle"
+            height="18"
+            width="18"
+          />
+          <span>Kha</span>
+        </a>
+        <a href="/research">Research</a>
+        <a href="/blog">Blog</a>
+
+        <div class="topnav-right">
+          <a
+            href="https://github.com/lotusirous"
+            target="_blank"
+            rel="noreferrer"
+            title="Github"
+            ><img
+              alt="Github"
+              src="/img/social/github.svg"
+              height="20"
+              width="20"
+          /></a>
+          <a
+            href="https://twitter.com/__ngtrongkha"
+            target="_blank"
+            rel="noreferrer"
+            title="Twitter"
+            ><img
+              alt="Twitter"
+              src="/img/social/twitter.svg"
+              height="20"
+              width="20"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div id="main">
+        <main><div class="article">
+
+<div class="when">
+  <time datetime="Oct 17, 2020">Oct 17, 2020</time>
+</div>
+<h1 class="post-title">Flare on 2020 - Level 1</h1>
+
+
+<p>This challenge is a python that have compiled to windows program. The organizer
+also gives us a source code of this program. Let's dive into the code by static
+analysis. We have the following functions</p>
+<pre class="language-txt"><code class="language-txt"> +buy_click : function
  +cat_clicked : function
  +decode_flag : function &lt;--
  +game_screen : function
@@ -13,17 +104,64 @@
 ▼ variables
     buying
     current_autoclickers
-    current_coins</code></pre><p>It looks like the program has several functions that may be of interest to us. In particular, the <code>password_check</code> and <code>decode_flag</code> functions stand out as potentially important.</p><p>To start, let's take a closer look at the <code>password_check</code> function. This function is likely responsible for verifying the user's password, so it will be important to understand how it works and what it does. We can examine the code line by line to see what it does and how it operates.</p><p>Next, let's move on to the <code>decode_flag</code> function. This function is probably responsible for decoding the flag that we need to find in order to solve the challenge. By analyzing the code in this function, we can learn more about how the flag is encoded and what we need to do to decode it.</p><p><strong>The <code>password_check</code> function</strong></p><p>Since the program requires user to enter a password with a protect screen, the developer implements this feature by 2 functions:</p><ul><li><code>password_screen</code> shows the input text.</li><li><code>password_check</code> checks the password as follows</li></ul><pre class="language-py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">password_check</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    current_coins</code></pre>
+<p>It looks like the program has several functions that may be of interest to us.
+In particular, the <code>password_check</code> and <code>decode_flag</code> functions stand out as
+potentially important.</p>
+<p>To start, let's take a closer look at the <code>password_check</code> function. This
+function is likely responsible for verifying the user's password, so it will be
+important to understand how it works and what it does. We can examine the code
+line by line to see what it does and how it operates.</p>
+<p>Next, let's move on to the <code>decode_flag</code> function. This function is probably
+responsible for decoding the flag that we need to find in order to solve the
+challenge. By analyzing the code in this function, we can learn more about how
+the flag is encoded and what we need to do to decode it.</p>
+<p><strong>The <code>password_check</code> function</strong></p>
+<p>Since the program requires user to enter a password with a protect screen, the
+developer implements this feature by 2 functions:</p>
+<ul>
+<li><code>password_screen</code> shows the input text.</li>
+<li><code>password_check</code> checks the password as follows</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">password_check</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     altered_key <span class="token operator">=</span> <span class="token string">"hiptu"</span>
     key <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> altered_key<span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token builtin">input</span> <span class="token operator">==</span> key</code></pre><p>The solution is trivial, they key is &quot;ghost&quot; by running the code in python interpreter</p><pre class="language-py"><code class="language-py"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token string">"hiptu"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre><p><strong>The <code>decode_flag</code> function</strong></p><p>I discovered that the <code>victory_screen</code> function calls the <code>decode_flag</code> function by using the &quot;find references&quot; feature from the Language Server Protocol (LSP). The <code>game_screen</code> function calculates the token value using the following logic:</p><pre class="language-py"><code class="language-py">target_amount <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">36</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">35</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token builtin">input</span> <span class="token operator">==</span> key</code></pre>
+<p>The solution is trivial, they key is &quot;ghost&quot; by running the code in python
+interpreter</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token string">"hiptu"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p><strong>The <code>decode_flag</code> function</strong></p>
+<p>I discovered that the <code>victory_screen</code> function calls the <code>decode_flag</code> function
+by using the &quot;find references&quot; feature from the Language Server Protocol (LSP).
+The <code>game_screen</code> function calculates the token value using the following logic:</p>
+<pre class="language-py"><code class="language-py">target_amount <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">36</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">35</span><span class="token punctuation">)</span>
 <span class="token keyword">if</span> current_coins <span class="token operator">></span> <span class="token punctuation">(</span>target_amount <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">while</span> current_coins <span class="token operator">>=</span> <span class="token punctuation">(</span>target_amount <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         current_coins <span class="token operator">-=</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">20</span>
     victory_screen<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>current_coins <span class="token operator">/</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span></code></pre><p>In order to display the victory screen and see the flag, the <code>current_coins</code> variable must have a value greater than <code>(target_amount - 2 ** 20)</code>. To achieve this, we can use the following code:</p><pre class="language-python"><code class="language-python">target_amount <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">36</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">35</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>  <span class="token comment"># +1 to jump inside the while loop.</span>
+    <span class="token keyword">return</span></code></pre>
+<p>In order to display the victory screen and see the flag, the <code>current_coins</code>
+variable must have a value greater than <code>(target_amount - 2 ** 20)</code>. To achieve
+this, we can use the following code:</p>
+<pre class="language-python"><code class="language-python">target_amount <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">36</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">**</span> <span class="token number">35</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>  <span class="token comment"># +1 to jump inside the while loop.</span>
 current_coins <span class="token operator">=</span> target_amount <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">20</span>
 <span class="token keyword">while</span> current_coins <span class="token operator">>=</span> <span class="token punctuation">(</span>target_amount <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     current_coins <span class="token operator">-=</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">20</span>
-token <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>current_coins <span class="token operator">/</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token number">8</span><span class="token punctuation">)</span></code></pre><p>With the <code>token</code> value calculated, we can now call the <code>decode_flag</code> function to decode the flag and print it to the screen:</p><pre class="language-py"><code class="language-py"><span class="token keyword">print</span><span class="token punctuation">(</span>decode_flag<span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">)</span>
-idle_with_kitty@flare<span class="token operator">-</span>on<span class="token punctuation">.</span>com</code></pre><div class="direction"><div class="next">« <a href="/posts/byte-order-in-go/">How to Detect Byte Order in Go</a></div></div></div></main></div></div><footer></footer></body></html>
+token <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>current_coins <span class="token operator">/</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token number">8</span><span class="token punctuation">)</span></code></pre>
+<p>With the <code>token</code> value calculated, we can now call the <code>decode_flag</code> function to
+decode the flag and print it to the screen:</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">print</span><span class="token punctuation">(</span>decode_flag<span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">)</span>
+idle_with_kitty@flare<span class="token operator">-</span>on<span class="token punctuation">.</span>com</code></pre>
+
+
+<div class="direction"><div class="next">« <a href="/posts/byte-order-in-go/">How to Detect Byte Order in Go</a></div>
+</div>
+
+</div>
+</main>
+      </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>
