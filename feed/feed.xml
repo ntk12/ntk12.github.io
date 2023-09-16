@@ -56,6 +56,14 @@ to search by title.&lt;/li&gt;
 &lt;p&gt;Here&#39;s a simple representation of how it looks:&lt;/p&gt;
 &lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;Google |https://google.com
 Youtube |https://youtube.com&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You might wonder why we&#39;ve chosen the pipe character (&lt;code&gt;|&lt;/code&gt;) as our delimiter when
+it&#39;s not part of URI standards, such as RFC 3986. The reason is simple: it
+serves as a practical and user-friendly solution. The pipe character is easily
+distinguishable, readable, and unlikely to conflict with the contents of
+bookmark titles or URLs, which often contain characters like commas and slashes.
+While it&#39;s not an official URI standard delimiter, its adoption in this context
+is a convention for enhancing readability and simplifying data parsing within
+the bookmark file.&lt;/p&gt;
 &lt;p&gt;By storing this content in a file &lt;code&gt;$HOME/.bookmarks&lt;/code&gt;, you gain the ability to
 track and search for bookmarks by title or link. Additionally, macOS supports
 opening links in your default browser by default. And to make things even
