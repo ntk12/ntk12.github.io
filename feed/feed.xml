@@ -5,12 +5,66 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2023-07-02T00:00:00Z</updated>
+	<updated>2023-09-16T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
 		<email>youremailaddress@example.com</email>
 	</author>
+	
+	<entry>
+		<title>A better solution for searching bookmarks</title>
+		<link href="https://lotusirous.github.io/posts/simple-bookmarks-manager/"/>
+		<updated>2023-09-16T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/simple-bookmarks-manager/</id>
+		<content type="html">&lt;p&gt;Have you ever felt overwhelmed by your bookmarks, desperately trying to find
+that one elusive link? If so, you&#39;re not alone. Many people struggle to keep
+their bookmarks organized and accessible.&lt;/p&gt;
+&lt;p&gt;Popular browsers like Brave and Chrome offer a folder-based organization system,
+which can quickly become unwieldy. Even when resorting to searching through
+browser-specific URLs like &lt;code&gt;brave://bookmarks/?q=&amp;lt;your keyword&amp;gt;&lt;/code&gt;, it often falls
+short because you may not remember the exact title or link.&lt;/p&gt;
+&lt;h2&gt;Bookmark&#39;s data structure&lt;/h2&gt;
+&lt;p&gt;At its core, a bookmark is quite straightforward. It consists of three elements:
+a title, a link to the webpage, and the action of opening that link. Here&#39;s a
+simple breakdown:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Title: The name you&#39;ve given to the bookmark (e.g., Google).&lt;/li&gt;
+&lt;li&gt;Link: The web address associated with the bookmark (e.g., &lt;a href=&quot;http://google.com/&quot;&gt;http://google.com&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Open action: The action you want to perform when you click on the bookmark,
+which is usually to open the link.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Why not store your bookmarks in a text file instead ?&lt;/h2&gt;
+&lt;p&gt;This may seem like a simple solution, but it offers several advantages over
+traditional bookmark managers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simplified Search: It&#39;s much easier to search a text file for a specific
+keyword than it is to search through a tree-like structure like a folder
+hierarchy. You can use a variety of tools to search and filter your bookmarks,
+including regular expressions and fuzzy search.&lt;/li&gt;
+&lt;li&gt;Version control: A text file can be easily tracked by version control. This
+means that you can easily recover your bookmarks if something goes wrong, or
+if you want to revert to a previous version.&lt;/li&gt;
+&lt;li&gt;Fuzzy Finding for Titles and Links: With this method, you can search for your
+bookmarks using either the title or the link. This is a significant
+improvement over traditional bookmark managers, which typically only allow you
+to search by title.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here&#39;s a simple representation of how it looks:&lt;/p&gt;
+&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;Google |https://google.com
+Youtube |https://youtube.com&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By storing this content in a file &lt;code&gt;$HOME/.bookmarks&lt;/code&gt;, you gain the ability to
+track and search for bookmarks by title or link, all while maintaining version
+control. Additionally, macOS supports opening links in your default browser by
+default. And to make things even simpler, you can achieve all this with a
+single-line solution:&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;bm&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;cat ~/.bookmarks |fzf | cut -d &#39;|&#39; -f 2 | tr -d &#39;[:space:]&#39; |xargs open&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In short, using a text file for bookmarks is simple and effective. It makes
+searching easy, offers version control, and allows direct access to your
+bookmarks. If you need a practical solution for better bookmark management, give
+it a try.&lt;/p&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>Go linkname directive</title>
