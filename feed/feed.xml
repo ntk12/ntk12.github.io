@@ -24,7 +24,7 @@ and simplifying code pattern searches effectively within Neovim.&lt;/p&gt;
 &lt;p&gt;My approach to using Semgrep is rather straightforward. I execute Semgrep from
 the command line to search for specific code patterns. For instance, you can
 look for a pattern in a Go codebase like this:&lt;/p&gt;
-&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;semgrep &lt;span class=&quot;token parameter variable&quot;&gt;--quiet&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--lang&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;go &lt;span class=&quot;token parameter variable&quot;&gt;--pattern&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;struct{ $NAME: func(...)}&#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;semgrep &lt;span class=&quot;token parameter variable&quot;&gt;--quiet&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--lang&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;go &lt;span class=&quot;token parameter variable&quot;&gt;--pattern&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;func min(...)&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;My Refined Workflow&lt;/h2&gt;
 &lt;p&gt;Here&#39;s the step-by-step approach I&#39;ve refined for maximizing Semgrep&#39;s
 capabilities:&lt;/p&gt;
@@ -87,8 +87,7 @@ field:&lt;/p&gt;
       &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; go
     &lt;span class=&quot;token key atrule&quot;&gt;severity&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; WARNING&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To make my life easier, I&#39;ve created an alias:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;alias sg=&amp;quot;run_semgrep&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;sg&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;run_semgrep&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In summary, this workflow eliminates the need for manual codebase investigation,
 making my development process significantly more efficient.&lt;/p&gt;
 </content>
