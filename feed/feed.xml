@@ -5,12 +5,137 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2023-09-16T00:00:00Z</updated>
+	<updated>2023-10-18T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
 		<email>youremailaddress@example.com</email>
 	</author>
+	
+	<entry>
+		<title>Using semgrep in vim</title>
+		<link href="https://lotusirous.github.io/posts/semgrep-with-vim/"/>
+		<updated>2023-10-18T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/semgrep-with-vim/</id>
+		<content type="html">&lt;p&gt;In this post, I want to share my workflow for harnessing the power of Semgrep in
+Vim. Semgrep, a robust code analysis tool, can significantly enhance your
+codebase investigation process. Let me take you through my method for optimizing
+and simplifying code pattern searches effectively within Neovim.&lt;/p&gt;
+&lt;p&gt;My approach to using Semgrep is rather straightforward. I execute Semgrep from
+the command line to search for specific code patterns. For instance, you can
+look for a pattern in a Go codebase like this:&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;semgrep &lt;span class=&quot;token parameter variable&quot;&gt;--quiet&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--lang&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;go &lt;span class=&quot;token parameter variable&quot;&gt;--pattern&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;struct{ $NAME: func(...)}&#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;My Refined Workflow&lt;/h2&gt;
+&lt;p&gt;Here&#39;s the step-by-step approach I&#39;ve refined for maximizing Semgrep&#39;s
+capabilities:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Pattern Configuration&lt;/strong&gt;: I begin by configuring the code pattern directly
+in a dedicated file, typically named semgrep_rule.yml.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Running Semgrep&lt;/strong&gt;: After configuring the pattern, I save the configuration
+file and execute Semgrep to initiate the code search.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Loading Results in Neovim&lt;/strong&gt;: Once Semgrep completes its search, I promptly
+load the results directly into Neovim for in-depth investigation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To streamline this process, I&#39;ve created a convenient script. It&#39;s worth noting
+that I use a random name for added flexibility when working on multiple
+sessions:&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function-name function&quot;&gt;run_semgrep&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;# Generate a random string for file name&lt;/span&gt;
+  &lt;span class=&quot;token assign-left variable&quot;&gt;random_value&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;cat&lt;/span&gt; /dev/urandom &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;&lt;span class=&quot;token environment constant&quot;&gt;LC_ALL&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;C &lt;span class=&quot;token function&quot;&gt;tr&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-dc&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;a-zA-Z0-9&#39;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;fold&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-w&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;# Create a temporary config file with a random value and a .yaml prefix&lt;/span&gt;
+  &lt;span class=&quot;token assign-left variable&quot;&gt;config_tempfile&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/tmp/config.&lt;span class=&quot;token variable&quot;&gt;${random_value}&lt;/span&gt;.yaml&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;# Copy the content of ~/.semgrep/config.yml to the temporary config file&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;cp&lt;/span&gt; ~/.semgrep/config.yml &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$config_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Make config file &lt;span class=&quot;token variable&quot;&gt;$config_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+
+
+  &lt;span class=&quot;token comment&quot;&gt;# Open the temporary config file in nvim for editing&lt;/span&gt;
+  nvim &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$config_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;# Create a temporary output file with a random value&lt;/span&gt;
+  &lt;span class=&quot;token assign-left variable&quot;&gt;output_tempfile&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/tmp/output.&lt;span class=&quot;token variable&quot;&gt;${random_value}&lt;/span&gt;.txt&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;# After closing nvim, execute semgrep&lt;/span&gt;
+  &lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Running semgrep .. Please wait&#39;&lt;/span&gt;
+  semgrep &lt;span class=&quot;token parameter variable&quot;&gt;--vim&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--quiet&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$config_tempfile&lt;/span&gt;&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$output_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;# Check if the output file is not empty&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$output_tempfile&lt;/span&gt;&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;# Open the output tempfile with nvim&lt;/span&gt;
+    nvim &lt;span class=&quot;token parameter variable&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;:cfile &lt;span class=&quot;token variable&quot;&gt;$output_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;fi&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;# Clean up the temporary files&lt;/span&gt;
+  &lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Clean up ... &lt;span class=&quot;token variable&quot;&gt;$config_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Clean up ... &lt;span class=&quot;token variable&quot;&gt;$output_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$config_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;$output_tempfile&lt;/span&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here&#39;s an example configuration for finding structs that contain a function as a
+field:&lt;/p&gt;
+&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; find&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;field&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;func
+    &lt;span class=&quot;token key atrule&quot;&gt;patterns&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+          type $T struct {
+            $FIELD func(...) $RESULT
+          }&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Semgrep found matches
+    &lt;span class=&quot;token key atrule&quot;&gt;languages&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; go
+    &lt;span class=&quot;token key atrule&quot;&gt;severity&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; WARNING&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To make my life easier, I&#39;ve created an alias:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;alias sg=&amp;quot;run_semgrep&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In summary, this workflow eliminates the need for manual codebase investigation,
+making my development process significantly more efficient.&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Testing http client in Go</title>
+		<link href="https://lotusirous.github.io/posts/http-client-testing-in-go/"/>
+		<updated>2023-10-13T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/http-client-testing-in-go/</id>
+		<content type="html">&lt;h2&gt;Http client in go&lt;/h2&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Client &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  httpClient &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;http&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Client
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ctx context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; username&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; password &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// do some stuff&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the caller&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;s Service&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Login&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ctx context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; username&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; password &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// do some sutff&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; err &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; s&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Client&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ctx&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; username&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; password &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; err &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; err
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// do more stuffs&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Define an interface for Client&lt;/h2&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Sends&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Sender &lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;Send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ctx context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Context&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; username&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; password &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;error&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;IN the service&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Service &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  Client Sender
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, we can do the test&lt;/p&gt;
+&lt;h2&gt;Mock the http with &lt;code&gt;RoundTripper&lt;/code&gt;&lt;/h2&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; client &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  httpClient &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;http&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Client
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the test file&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; client &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  httpClient &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;http&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Client
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>Fuzzy Finding Your Bookmarks</title>

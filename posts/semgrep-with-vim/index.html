@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#680"><title>Using semgrep in vim</title><meta name="description" content="My workflow for using semgrep in vim"><link rel="stylesheet" href="/css/prism-base16-monokai.dark.css"><link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Kha&#39;s - Journeys and times of me"><link rel="alternate" href="/feed/feed.json" type="application/json" title="Kha&#39;s - Journeys and times of me"><link rel="stylesheet" href="/css/index.css"><script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script><script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "forest",
+      });</script></head><body><div class="topnav"><div class="topnav-content"><a href="/" style="vertical-align: middle"><img src="/img/home.svg" alt="home icon" align="middle" height="18" width="18"> <span>Kha</span> </a><a href="/research">Research</a> <a href="/blog">Blog</a><div class="topnav-right"><a href="https://github.com/lotusirous" target="_blank" rel="noreferrer" title="Github"><img alt="Github" src="/img/social/github.svg" height="20" width="20"></a><a href="https://twitter.com/__ngtrongkha" target="_blank" rel="noreferrer" title="Twitter"><img alt="Twitter" src="/img/social/twitter.svg" height="20" width="20"></a></div></div></div><div id="content"><div id="main"><main><div class="article"><div class="when"><time datetime="Oct 18, 2023">Oct 18, 2023</time></div><h1 class="post-title">Using semgrep in vim</h1><p>In this post, I want to share my workflow for harnessing the power of Semgrep in Vim. Semgrep, a robust code analysis tool, can significantly enhance your codebase investigation process. Let me take you through my method for optimizing and simplifying code pattern searches effectively within Neovim.</p><p>My approach to using Semgrep is rather straightforward. I execute Semgrep from the command line to search for specific code patterns. For instance, you can look for a pattern in a Go codebase like this:</p><pre class="language-sh"><code class="language-sh">semgrep <span class="token parameter variable">--quiet</span> <span class="token parameter variable">--lang</span><span class="token operator">=</span>go <span class="token parameter variable">--pattern</span><span class="token operator">=</span><span class="token string">'struct{ $NAME: func(...)}'</span></code></pre><h2>My Refined Workflow</h2><p>Here's the step-by-step approach I've refined for maximizing Semgrep's capabilities:</p><ol><li><strong>Pattern Configuration</strong>: I begin by configuring the code pattern directly in a dedicated file, typically named semgrep_rule.yml.</li><li><strong>Running Semgrep</strong>: After configuring the pattern, I save the configuration file and execute Semgrep to initiate the code search.</li><li><strong>Loading Results in Neovim</strong>: Once Semgrep completes its search, I promptly load the results directly into Neovim for in-depth investigation.</li></ol><p>To streamline this process, I've created a convenient script. It's worth noting that I use a random name for added flexibility when working on multiple sessions:</p><pre class="language-sh"><code class="language-sh"><span class="token keyword">function</span> <span class="token function-name function">run_semgrep</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment"># Generate a random string for file name</span>
+  <span class="token assign-left variable">random_value</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /dev/urandom <span class="token operator">|</span> <span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>C <span class="token function">tr</span> <span class="token parameter variable">-dc</span> <span class="token string">'a-zA-Z0-9'</span> <span class="token operator">|</span> <span class="token function">fold</span> <span class="token parameter variable">-w</span> <span class="token number">6</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">1</span><span class="token variable">)</span></span>
+
+  <span class="token comment"># Create a temporary config file with a random value and a .yaml prefix</span>
+  <span class="token assign-left variable">config_tempfile</span><span class="token operator">=</span><span class="token string">"/tmp/config.<span class="token variable">${random_value}</span>.yaml"</span>
+
+  <span class="token comment"># Copy the content of ~/.semgrep/config.yml to the temporary config file</span>
+  <span class="token function">cp</span> ~/.semgrep/config.yml <span class="token string">"<span class="token variable">$config_tempfile</span>"</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Make config file <span class="token variable">$config_tempfile</span>"</span>
+
+
+  <span class="token comment"># Open the temporary config file in nvim for editing</span>
+  nvim <span class="token string">"<span class="token variable">$config_tempfile</span>"</span>
+
+  <span class="token comment"># Create a temporary output file with a random value</span>
+  <span class="token assign-left variable">output_tempfile</span><span class="token operator">=</span><span class="token string">"/tmp/output.<span class="token variable">${random_value}</span>.txt"</span>
+
+  <span class="token comment"># After closing nvim, execute semgrep</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">'Running semgrep .. Please wait'</span>
+  semgrep <span class="token parameter variable">--vim</span> <span class="token parameter variable">--quiet</span> <span class="token parameter variable">-f</span> <span class="token string">"<span class="token variable">$config_tempfile</span>"</span> <span class="token operator">></span> <span class="token string">"<span class="token variable">$output_tempfile</span>"</span>
+
+  <span class="token comment"># Check if the output file is not empty</span>
+  <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-s</span> <span class="token string">"<span class="token variable">$output_tempfile</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token comment"># Open the output tempfile with nvim</span>
+    nvim <span class="token parameter variable">-c</span> <span class="token string">":cfile <span class="token variable">$output_tempfile</span>"</span>
+  <span class="token keyword">fi</span>
+
+  <span class="token comment"># Clean up the temporary files</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Clean up ... <span class="token variable">$config_tempfile</span>"</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Clean up ... <span class="token variable">$output_tempfile</span>"</span>
+  <span class="token function">rm</span> <span class="token string">"<span class="token variable">$config_tempfile</span>"</span>
+  <span class="token function">rm</span> <span class="token string">"<span class="token variable">$output_tempfile</span>"</span>
+<span class="token punctuation">}</span></code></pre><p>Here's an example configuration for finding structs that contain a function as a field:</p><pre class="language-yml"><code class="language-yml"><span class="token key atrule">rules</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">id</span><span class="token punctuation">:</span> find<span class="token punctuation">-</span>field<span class="token punctuation">-</span>func
+    <span class="token key atrule">patterns</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">pattern</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+          type $T struct {
+            $FIELD func(...) $RESULT
+          }</span>
+    <span class="token key atrule">message</span><span class="token punctuation">:</span> Semgrep found matches
+    <span class="token key atrule">languages</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> go
+    <span class="token key atrule">severity</span><span class="token punctuation">:</span> WARNING</code></pre><p>To make my life easier, I've created an alias:</p><pre><code>alias sg=&quot;run_semgrep&quot;
+</code></pre><p>In summary, this workflow eliminates the need for manual codebase investigation, making my development process significantly more efficient.</p><div class="direction"><div class="previous"><a href="/posts/http-client-testing-in-go/">Testing http client in Go</a> »</div></div></div></main></div></div><footer></footer></body></html>
