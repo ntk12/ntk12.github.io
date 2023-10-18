@@ -87,11 +87,6 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/posts/http-client-testing-in-go/</loc>
-    <lastmod>2023-10-13</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lotusirous.github.io/posts/semgrep-with-vim/</loc>
     <lastmod>2023-10-18</lastmod>
   </url>
