@@ -21,7 +21,7 @@
 
   <span class="token comment"># After closing nvim, execute semgrep</span>
   <span class="token builtin class-name">echo</span> <span class="token string">'Running semgrep .. Please wait'</span>
-  semgrep <span class="token parameter variable">--vim</span> <span class="token parameter variable">--quiet</span> <span class="token parameter variable">-f</span> <span class="token string">"<span class="token variable">$config_tempfile</span>"</span> <span class="token operator">></span> <span class="token string">"<span class="token variable">$output_tempfile</span>"</span>
+  semgrep <span class="token parameter variable">--vim</span>  <span class="token parameter variable">-f</span> <span class="token variable">$config_tempfile</span> <span class="token parameter variable">--output</span> <span class="token variable">$output_tempfile</span>
 
   <span class="token comment"># Check if the output file is not empty</span>
   <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-s</span> <span class="token string">"<span class="token variable">$output_tempfile</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
