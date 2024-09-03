@@ -14,27 +14,39 @@
 	
 	<entry>
 		<title>Enforcing Field Names in Go</title>
-		<link href="https://lotusirous.github.io/posts/go-incomparable/"/>
+		<link href="https://lotusirous.github.io/posts/enforcing-field-in-struct/"/>
 		<updated>2023-11-02T00:00:00Z</updated>
-		<id>https://lotusirous.github.io/posts/go-incomparable/</id>
-		<content type="html">&lt;p&gt;In the world of Go programming, code maintainability and readability are essential aspects of writing efficient and robust software. One of the ways to achieve this is by enforcing the use of field names when initializing struct literals. This helps code reviewers and developers understand the purpose and context of the values assigned to each field. In this blog post, we&#39;ll explore a clever trick that forces users of an exported struct to include field names in their code, ensuring clarity and reducing potential issues down the road.&lt;/p&gt;
-&lt;p&gt;The Trick:
-The trick we&#39;re about to reveal is quite simple yet incredibly effective. It involves the use of a small, anonymous, and unused struct field to force users to write field names when creating struct literals. This technique has been discussed and well-documented in a Github issue (&lt;a href=&quot;https://github.com/golang/go/issues/2794&quot;&gt;https://github.com/golang/go/issues/2794&lt;/a&gt;) and has found its way into various Go codebases.&lt;/p&gt;
+		<id>https://lotusirous.github.io/posts/enforcing-field-in-struct/</id>
+		<content type="html">&lt;p&gt;The problem&lt;/p&gt;
+&lt;p&gt;Sometimes, you want a struct field in Go to clearly convey its meaning through
+its value. However, you also want to enforce that the caller explicitly provides
+the field names to ensure the struct remains clear and understandable.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Bad
+
+User{&amp;quot;Foo&amp;quot;, 16, &amp;quot;foo@bar.com&amp;quot;}
+
+// Good
+User{Name: &amp;quot;Foo&amp;quot;, Age: 16, Email: &amp;quot;foo@bar.com&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This post introduces a technique to enforce the use of field names when
+initializing structs.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Trick&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This technique has been discussed and well-documented in a Github issue
+(&lt;a href=&quot;https://github.com/golang/go/issues/2794&quot;&gt;https://github.com/golang/go/issues/2794&lt;/a&gt;) and has found its way into various
+Go codebases.&lt;/p&gt;
 &lt;p&gt;Here&#39;s the trick in action:&lt;/p&gt;
 &lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Struct &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     A &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;
     B &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
     &lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// The trick&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With this struct definition, any usage of Struct{1, &amp;quot;2&amp;quot;} will result in a compile error, prompting developers to specify field names.&lt;/p&gt;
+&lt;p&gt;With this struct definition, any usage of &lt;code&gt;Struct{1, &amp;quot;2&amp;quot;}&lt;/code&gt; will result in a
+compile error, prompting developers to specify field names.&lt;/p&gt;
 &lt;p&gt;Compile Error:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;./prog.go:4:16: too few values in Struct literal
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The _ struct{} field serves as a clever reminder for the developer to be more explicit about their intentions when creating struct literals.&lt;/p&gt;
-&lt;p&gt;Why Use This Trick?&lt;/p&gt;
-&lt;p&gt;Clarity: By enforcing field names, code becomes self-documenting, making it easier for both authors and reviewers to understand the intent of the code. This leads to more maintainable and reliable code.&lt;/p&gt;
-&lt;p&gt;Avoid Bugs: When struct fields are explicitly named during initialization, it helps prevent bugs and unexpected behavior that might arise from the misplacement of values.&lt;/p&gt;
-&lt;p&gt;Compatibility: This trick works perfectly with the Go standard library and is compatible with other Go tools and packages&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;_ struct{}&lt;/code&gt; field serves as a clever reminder for the developer to be more
+explicit about their intentions when creating struct literals.&lt;/p&gt;
 </content>
 	</entry>
 	
