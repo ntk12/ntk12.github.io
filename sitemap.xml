@@ -37,11 +37,6 @@
   </url>
   
   <url>
-    <loc>https://lotusirous.github.io/tags/tips/</loc>
-    <lastmod>2021-10-17</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lotusirous.github.io/tags/hacks/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
@@ -53,6 +48,11 @@
   
   <url>
     <loc>https://lotusirous.github.io/tags/semgrep/</loc>
+    <lastmod>2021-10-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lotusirous.github.io/tags/tips/</loc>
     <lastmod>2021-10-17</lastmod>
   </url>
   
@@ -89,5 +89,10 @@
   <url>
     <loc>https://lotusirous.github.io/posts/semgrep-with-vim/</loc>
     <lastmod>2023-10-18</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lotusirous.github.io/posts/go-incomparable/</loc>
+    <lastmod>2023-11-02</lastmod>
   </url>
 </urlset>

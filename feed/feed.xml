@@ -5,12 +5,38 @@
 	
 	<link href="https://lotusirous.github.io/feed/feed.xml" rel="self"/>
 	<link href="https://lotusirous.github.io/"/>
-	<updated>2023-10-18T00:00:00Z</updated>
+	<updated>2023-11-02T00:00:00Z</updated>
 	<id>https://lotusirous.github.io/</id>
 	<author>
 		<name>Your Name Here</name>
 		<email>youremailaddress@example.com</email>
 	</author>
+	
+	<entry>
+		<title>Enforcing Field Names in Go</title>
+		<link href="https://lotusirous.github.io/posts/go-incomparable/"/>
+		<updated>2023-11-02T00:00:00Z</updated>
+		<id>https://lotusirous.github.io/posts/go-incomparable/</id>
+		<content type="html">&lt;p&gt;In the world of Go programming, code maintainability and readability are essential aspects of writing efficient and robust software. One of the ways to achieve this is by enforcing the use of field names when initializing struct literals. This helps code reviewers and developers understand the purpose and context of the values assigned to each field. In this blog post, we&#39;ll explore a clever trick that forces users of an exported struct to include field names in their code, ensuring clarity and reducing potential issues down the road.&lt;/p&gt;
+&lt;p&gt;The Trick:
+The trick we&#39;re about to reveal is quite simple yet incredibly effective. It involves the use of a small, anonymous, and unused struct field to force users to write field names when creating struct literals. This technique has been discussed and well-documented in a Github issue (&lt;a href=&quot;https://github.com/golang/go/issues/2794&quot;&gt;https://github.com/golang/go/issues/2794&lt;/a&gt;) and has found its way into various Go codebases.&lt;/p&gt;
+&lt;p&gt;Here&#39;s the trick in action:&lt;/p&gt;
+&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; Struct &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    A &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;
+    B &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;struct&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// The trick&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With this struct definition, any usage of Struct{1, &amp;quot;2&amp;quot;} will result in a compile error, prompting developers to specify field names.&lt;/p&gt;
+&lt;p&gt;Compile Error:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./prog.go:4:16: too few values in Struct literal
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The _ struct{} field serves as a clever reminder for the developer to be more explicit about their intentions when creating struct literals.&lt;/p&gt;
+&lt;p&gt;Why Use This Trick?&lt;/p&gt;
+&lt;p&gt;Clarity: By enforcing field names, code becomes self-documenting, making it easier for both authors and reviewers to understand the intent of the code. This leads to more maintainable and reliable code.&lt;/p&gt;
+&lt;p&gt;Avoid Bugs: When struct fields are explicitly named during initialization, it helps prevent bugs and unexpected behavior that might arise from the misplacement of values.&lt;/p&gt;
+&lt;p&gt;Compatibility: This trick works perfectly with the Go standard library and is compatible with other Go tools and packages&lt;/p&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>Using semgrep in vim</title>
@@ -146,6 +172,8 @@ track and search for bookmarks by title or link. Additionally, macOS supports
 opening links in your default browser by default. And to make things even
 simpler, you can achieve all this with a single-line solution:&lt;/p&gt;
 &lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;bm&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;cat ~/.bookmarks |fzf | cut -d &#39;|&#39; -f 2 | awk &#39;{&#92;&lt;span class=&quot;token variable&quot;&gt;$1&lt;/span&gt;=&#92;&lt;span class=&quot;token variable&quot;&gt;$1&lt;/span&gt;;print}&#39; |xargs open&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Another use case for running local commands&lt;/h2&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;bm&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;cat ~/.aliases |fzf | cut -d &#39;|&#39; -f 2 | awk &#39;{&#92;&lt;span class=&quot;token variable&quot;&gt;$1&lt;/span&gt;=&#92;&lt;span class=&quot;token variable&quot;&gt;$1&lt;/span&gt;;print}&#39; |bash -x&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you need a practical solution for better bookmark management, give it a try.&lt;/p&gt;
 </content>
 	</entry>
